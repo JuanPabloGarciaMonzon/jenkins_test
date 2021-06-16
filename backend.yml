@@ -36,13 +36,13 @@
       url: https://download.docker.com/linux/debian/gpg
       state: present
 
-  - name: Import a key from a file
-    ansible.builtin.rpm_key:
-      state: present
-      key: /usr/share/keyrings/docker-archive-keyring.gpg
-
   - name: Update apt and install docker-ce
-    apt: update_cache=yes name=docker-ce name = docker-ce-cli name = containerd.io
+    apt:
+      name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+      update_cache: yes
 
   - name: ensure docker is running
     service: name=docker state=started
+
+
+
