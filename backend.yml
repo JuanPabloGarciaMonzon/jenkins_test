@@ -2,7 +2,17 @@
   become: True
   tasks:
 
-  - name: jenkins list
-    action: command sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
-    /etc/apt/sources.list.d/jenkins.list'
+  - name: update
+    action: command apt-get update -y
+  - name: install java
+    action: command apt install openjdk-11-jdk -y
+  - name: java version
+    action: command java -version
+  - name: update
+    apt:
+      update_cache: yes
+  - name: Install wget
+    apt:
+      name: wget
+      state: present
   
