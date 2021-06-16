@@ -15,8 +15,13 @@
     apt:
       name: wget
       state: present
-  - name: Wget Jenkinsfile
-    action: command wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+  - name: Download foo.conf
+    get_url:
+      url: ttps://pkg.jenkins.io/debian-stable/jenkins.io.key
+      dest: /home/asterionmorrigan
+  - name: Key Add
+    action: command apt-key add -
+    
   - name: Jenkins List
     action: command sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \ /etc/apt/sources.list.d/jenkins.list'
   
