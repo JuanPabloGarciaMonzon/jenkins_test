@@ -36,9 +36,22 @@
       url: https://download.docker.com/linux/debian/gpg
       state: present
 
-  - name: Update apt and install docker-ce
-    apt: update_cache=yes name=docker-ce state=latest
+  - name: ensure the repository is configured
+    apt_repository: repo='deb [arch=amd64] https://download.docker.com/linux/debian buster stable' state=present
+    become: yes
 
+  - name: update docker repository
+    apt: update_cache=yes
+    become: yes
+     
+  - name: Install docker-ce
+    apt: 
+      name:  ['docker-ce', 'docker-ce-cli', 'containerd.io']
+      
+  - name: update docker repository
+    apt: update_cache=yes
+    become: yes
+    
   - name: ensure docker is running
     service: name=docker state=started
 
