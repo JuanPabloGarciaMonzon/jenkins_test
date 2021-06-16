@@ -1,9 +1,7 @@
 - hosts: practica
   become: True
   tasks:
-
-  - name: nodejs package
-    shell: 'curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.s'
+    
   - name: install nodejs
     apt: name=nodejs update_cache=yes
     become: yes
