@@ -37,9 +37,7 @@
       state: present
 
   - name: Update apt and install docker-ce
-    apt:
-      name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
-      update_cache: yes
+    apt: update_cache=yes name=docker-ce state=latest
 
   - name: ensure docker is running
     service: name=docker state=started
