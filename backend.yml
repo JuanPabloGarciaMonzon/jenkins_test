@@ -64,7 +64,3 @@
   - name: docker-compose version
     action: command docker-compose --version
 
-  - name: docker-compose version
-    action: command gcloud --version
-
-
