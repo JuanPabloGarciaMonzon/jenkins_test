@@ -11,17 +11,18 @@
   - name: update
     apt:
       update_cache: yes
-  - name: Install wget
-    apt:
-      name: wget
-      state: present
-  - name: Download foo.conf
-    get_url:
-      url: ttps://pkg.jenkins.io/debian-stable/jenkins.io.key
-      dest: /home/asterionmorrigan
-  - name: Key Add
-    action: command apt-key add -
-    
-  - name: Jenkins List
-    action: command sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \ /etc/apt/sources.list.d/jenkins.list'
+  - name: ensure the jenkins apt repository key is installed
+    apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
+    become: yes
+
+  - name: ensure the repository is configured
+    apt_repository: repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present
+    become: yes
+
+  - name: ensure jenkins is installed
+    apt: name=jenkins update_cache=yes
+    become: yes
+
+  - name: ensure jenkins is running
+    service: name=jenkins state=started
   
