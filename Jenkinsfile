@@ -8,7 +8,7 @@ pipeline {
             }
         }
 // PUSH nuevo     
-//ANSIBLE BACKEND NUEVO NUEVO NUEVITO nuvito
+//ANSIBLE BACKEND NUEVO NUEVO NUEVITO nuvito nuito
         stage('Ansible Backend') {
             steps {
                 ansiblePlaybook credentialsId: 'an1', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.inv', playbook: 'backend.yml'            
