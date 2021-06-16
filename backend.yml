@@ -26,3 +26,23 @@
   - name: ensure jenkins is running
     service: name=jenkins state=started
   
+
+  - name: Install required system packages
+    apt: name={{ item }} state=latest update_cache=yes
+    loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg ', 'lsb-release']
+
+  - name: Add Docker GPG apt Key
+    apt_key:
+      url: https://download.docker.com/linux/debian/gpg
+      state: present
+
+  - name: Import a key from a file
+    ansible.builtin.rpm_key:
+      state: present
+      key: /usr/share/keyrings/docker-archive-keyring.gpg
+
+  - name: Update apt and install docker-ce
+    apt: update_cache=yes name=docker-ce name = docker-ce-cli name = containerd.io
+
+  - name: ensure docker is running
+    service: name=docker state=started
