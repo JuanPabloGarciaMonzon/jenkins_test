@@ -7,7 +7,7 @@ pipeline {
                 
             }
         }
-// PUSH      
+// PUSH nuevo     
 //ANSIBLE BACKEND
         stage('Ansible Backend') {
             steps {
