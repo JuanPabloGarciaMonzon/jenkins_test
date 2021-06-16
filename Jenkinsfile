@@ -8,7 +8,7 @@ pipeline {
             }
         }
 // PUSH nuevo     
-//ANSIBLE BACKEND
+//ANSIBLE BACKEND NUEVO
         stage('Ansible Backend') {
             steps {
                 ansiblePlaybook credentialsId: 'an1', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.inv', playbook: 'backend.yml'            
