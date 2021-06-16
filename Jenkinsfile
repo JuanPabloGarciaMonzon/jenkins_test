@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('git') {
             steps {
-                git 'https://github.com/valdezpjose/sa'            
+                git 'https://github.com/JuanPabloGarciaMonzon/jenkins_test.git'            
                 
             }
         }
