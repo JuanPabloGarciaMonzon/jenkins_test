@@ -12,6 +12,9 @@
     apt:
       update_cache: yes
   
+  - name: Install required system packages
+    apt: name=gnupg state=latest update_cache=yes
+    
   - name: ensure the jenkins apt repository key is installed
     apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
     become: yes
