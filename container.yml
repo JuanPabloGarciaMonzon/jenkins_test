@@ -1,9 +1,16 @@
 - hosts: practica
   become: True
   tasks:
-	
+  - name: Update repositories cache and install "foo" package
+    apt:
+      name: python3-pip
+      update_cache: yes
+  
+  - pip:
+      name: docker-py
+
   - name: data container
-    docker:
-     name: mydata
-     image: hello-world
-     state: started
+    docker_container:
+      name: mydata
+      image: hello-world
+      state: started
