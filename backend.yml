@@ -29,9 +29,11 @@
     #service: name=jenkins state=started
   
   - name: Download jenkins.repo
-    get_url:
-      url: 'deb https://pkg.jenkins.io/debian-stable binary/'
-      dest: /etc/apt/sources.list.d/jenkins.list
+    apt_repository: 
+      repo='deb http://pkg.jenkins.io/debian-stable binary/' 
+      state=present
+    dest: /etc/apt/sources.list.d/jenkins.list
+    become: yes
  
   - name: Import Jenkins Key
     apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
