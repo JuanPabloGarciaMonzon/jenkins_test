@@ -1,5 +1,9 @@
-- name: data container
-  docker:
-    name: mydata
-    image: hello-world
-    state: started
+- hosts: practica
+  become: True
+  tasks:
+	
+  - name: data container
+    docker:
+     name: mydata
+     image: hello-world
+     state: started
