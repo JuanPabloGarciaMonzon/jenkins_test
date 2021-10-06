@@ -11,23 +11,37 @@
   - name: update
     apt:
       update_cache: yes
-  - name: ensure the jenkins apt repository key is installed
-    apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
-    become: yes
+  
+  #- name: ensure the jenkins apt repository key is installed
+    #apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
+    #become: yes
 
-  - name: ensure the repository is configured
-    apt_repository: repo='deb http://pkg.jenkins.io/debian-stable binary/' state=present
-    dest: /etc/apt/sources.list.d/jenkins.list
-    become: yes
+  #- name: ensure the repository is configured
+    #apt_repository: repo='deb http://pkg.jenkins.io/debian-stable binary/' state=present
+    #dest: /etc/apt/sources.list.d/jenkins.list
+    #become: yes
 
+  #- name: ensure jenkins is installed
+    #apt: name=jenkins update_cache=yes
+    #become: yes
+
+  #- name: ensure jenkins is running
+    #service: name=jenkins state=started
+  
+  - name: Download jenkins.repo
+    get_url:
+      url: http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+      dest: /etc/yum.repos.d/jenkins.repo
+ 
+  - name: Import Jenkins Key
+    rpm_key:
+      state: present
+      key: https://jenkins-ci.org/redhat/jenkins-ci.org.key
+   
   - name: ensure jenkins is installed
     apt: name=jenkins update_cache=yes
     become: yes
-
-  - name: ensure jenkins is running
-    service: name=jenkins state=started
-  
-
+    
   - name: Install required system packages
     apt: name={{ item }} state=latest update_cache=yes
     loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg', 'lsb-release']
