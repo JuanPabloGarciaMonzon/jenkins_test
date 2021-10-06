@@ -54,8 +54,10 @@
 
   - name: ensure the repository is configured
     #apt_repository: repo='deb [arch=amd64] https://download.docker.com/linux/debian buster stable' state=present
-    repo: deb https://download.docker.com/linux/ubuntu bionic stable
-    become: yes
+    apt_repository:
+       repo: deb https://download.docker.com/linux/ubuntu bionic stable
+       state: present
+    #become: yes
 
   - name: update docker repository
     apt: update_cache=yes
