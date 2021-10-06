@@ -28,12 +28,10 @@
   #- name: ensure jenkins is running
     #service: name=jenkins state=started
   
-  - name: Download jenkins.repo
-    apt_repository: 
-      repo='deb http://pkg.jenkins.io/debian-stable binary/' 
-      state=present
-    dest: /etc/apt/sources.list.d/jenkins.list
-    become: yes
+  - name: Add source repository into sources list
+    ansible.builtin.apt_repository:
+      repo: deb http://pkg.jenkins.io/debian-stable binary/
+      state: present
  
   - name: Import Jenkins Key
     apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
