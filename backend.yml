@@ -20,7 +20,7 @@
     become: yes
 
   - name: ensure the repository is configured
-    apt_repository: repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present
+    apt_repository: repo="deb https://pkg.jenkins.io/debian-stable binary/" state=present
     register: apt_repository_output
 
   - name: ensure jenkins is installed
