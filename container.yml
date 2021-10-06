@@ -1,0 +1,5 @@
+- name: data container
+  docker:
+    name: mydata
+    image: hello-world
+    state: started
