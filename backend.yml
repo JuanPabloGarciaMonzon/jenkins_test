@@ -16,9 +16,9 @@
     become: yes
 
   - name: ensure the repository is configured
-    become: yes
     apt_repository: repo='deb http://pkg.jenkins.io/debian-stable binary/' state=present
-    
+    dest: /etc/apt/sources.list.d/jenkins.list
+    become: yes
 
   - name: ensure jenkins is installed
     apt: name=jenkins update_cache=yes
