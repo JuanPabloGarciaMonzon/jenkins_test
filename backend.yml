@@ -12,35 +12,22 @@
     apt:
       update_cache: yes
   
-  #- name: ensure the jenkins apt repository key is installed
-    #apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
-    #become: yes
+  - name: ensure the jenkins apt repository key is installed
+    apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
+    become: yes
 
-  #- name: ensure the repository is configured
-    #apt_repository: repo='deb http://pkg.jenkins.io/debian-stable binary/' state=present
-    #dest: /etc/apt/sources.list.d/jenkins.list
-    #become: yes
+  - name: ensure the repository is configured
+    apt_repository: repo='deb http://pkg.jenkins.io/debian-stable binary/' state=present
+    dest: /etc/apt/sources.list.d/jenkins.list
+    become: yes
 
-  #- name: ensure jenkins is installed
-    #apt: name=jenkins update_cache=yes
-    #become: yes
+  - name: ensure jenkins is installed
+    apt: name=jenkins update_cache=yes
+    become: yes
 
-  #- name: ensure jenkins is running
-    #service: name=jenkins state=started
+  - name: ensure jenkins is running
+    service: name=jenkins state=started
   
-  #- name: ensure the repository is configured
-    #apt_repository:
-      #repo='deb http://pkg.jenkins.io/debian-stable binary/' 
-      #state=present
-    #become: yes
- 
-  #- name: Import Jenkins Key
-    #apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
-    #become: yes
-    
-  #- name: ensure jenkins is installed
-    #apt: name=jenkins update_cache=yes
-    #become: yes
     
   - name: Install required system packages
     apt: name={{ item }} state=latest update_cache=yes
@@ -48,17 +35,12 @@
 
   - name: Add Docker GPG apt Key
     apt_key:
-      #url: https://download.docker.com/linux/debian/gpg 
-      url: https://download.docker.com/linux/ubuntu/gpg
+      url: https://download.docker.com/linux/debian/gpg 
       state: present
 
   - name: ensure the repository is configured
-    #apt_repository: repo='deb [arch=amd64] https://download.docker.com/linux/debian buster stable' state=present
-    apt_repository:
-       repo: deb https://download.docker.com/linux/ubuntu bionic stable
-       state: present
-       update_cache: no
-    #become: yes
+    apt_repository: repo='deb [arch=amd64] https://download.docker.com/linux/debian buster stable' state=present
+    become: yes
 
   - name: update docker repository
     apt: update_cache=yes
