@@ -29,7 +29,7 @@
     #service: name=jenkins state=started
   
   - name: ensure the repository is configured
-    ansible.builtin.apt_repository:
+    apt_repository:
       repo='deb http://pkg.jenkins.io/debian-stable binary/' 
       state=present
     become: yes
